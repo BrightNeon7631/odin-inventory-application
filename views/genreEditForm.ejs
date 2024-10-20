@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles//styles.css">
+    <title>Inventory App</title>
+</head>
+<body>
+    <%- include('partials/header') %>
+    <div class="form-container">
+        <h1>Edit Genre</h1>
+        <form class="add-edit-form" method="POST" action="edit">
+            <div class="form-item">
+                <label for="genreName">Name</label>
+                <input name="genreName" id="genreName" type="text" required maxlength="100" value="<%= genre.name%>"/>
+            </div>
+            <div class="form-item">
+                <label for="description">Description</label>
+                <textarea name="description" id="description" type="text" required maxlength="255"><%= genre.description%></textarea>
+            </div>
+            <button>Update Genre</button>
+        </form>
+    </div>
+    <%- include('partials/errors.ejs') %>
+</body>
+</html>

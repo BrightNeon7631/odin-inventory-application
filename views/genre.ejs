@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <title>Inventory App</title>
+</head>
+<body>
+    <%- include('partials/header') %>
+    <div class="genre-text">
+        <h1><%= genre.name%></h1>
+        <div><%= genre.description%></div>
+    </div>
+
+    <div class="genre-buttons genre-buttons-div">  
+        <% if (!locals.confirm) {%>
+            <form method="GET" action="/genres/<%= genre.id%>/delete">
+                <button>Delete</button>
+            </form>
+            <form method="GET" action="/genres/<%= genre.id%>/edit">
+                <button>Edit</button>
+            </form> 
+        <% } else { %>
+            <form method="POST" action="/genres/<%= genre.id%>/delete">
+                <input name="confirmPassword" id="confirmPassword" type="password" maxlength="255" placeholder="Enter admin password" required/>
+                <button>Confirm Delete</button>
+            </form>
+        <% } %>        
+    </div>
+    <%- include('partials/errors.ejs') %>
+
+    <h1 class="genre-movies-h1">Movies</h1>
+    <div class="movies-container">
+        <% movies.map((movie) => { %>
+            <div class="movie">
+                <img src="<%= movie.image_url%>" alt="movie poster"/>
+                <div class="movie-bottom">
+                    <div class="movie-title"><%= movie.title%></div>
+                    <div><%= movie.director%></div>
+                    <div><%= new Date(movie.release_date).toLocaleDateString('en-US')%></div>
+                    <div class="movie-price">$<%= movie.price%></div>
+                </div>
+                <div class="movie-buttons">
+                    <form method="GET" action="/movies/<%= movie.id%>">
+                        <button>View</button>
+                    </form>   
+                    <form method="GET" action="/movies/<%= movie.id%>/delete">
+                        <button>Delete</button>
+                    </form>
+                    <form method="GET" action="/movies/<%= movie.id%>/edit">
+                        <button>Edit</button>
+                    </form>         
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</body>
+</html>

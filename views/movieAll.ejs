@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <title>Inventory App</title>
+</head>
+<body>
+    <%- include('partials/header') %>
+    <div class="top-text">
+        <div class="movies-text">
+            <h1>All Movies</h1>
+            <div>Here's a list of all available movies.</div>
+        </div>
+        <a class="movie-add-button" href="/movies/new"><button>Add Movie</button></a>
+    </div>
+    <div class="movies-container">
+        <% movies.map((movie) => { %>
+            <div class="movie">
+                <img src="<%= movie.image_url%>" alt="movie poster"/>
+                <div class="movie-div">
+                    <div class="movie-bottom">
+                        <div class="movie-title"><%= movie.title%> <span>(<%= new Date(movie.release_date).getFullYear()%>)</span></div>
+                        <div><%= movie.name%></div>  <!-- genre name -->
+                        <div><%= movie.director%></div>
+                        <div class="movie-price">$<%= movie.price%></div>
+                    </div>
+                    <div class="movie-buttons">
+                        <form method="GET" action="/movies/<%= movie.id%>">
+                            <button>View</button>
+                        </form>   
+                        <form method="GET" action="/movies/<%= movie.id%>/delete">
+                            <button>Delete</button>
+                        </form>
+                        <form method="GET" action="/movies/<%= movie.id%>/edit">
+                            <button>Edit</button>
+                        </form>         
+                    </div>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</body>
+</html>

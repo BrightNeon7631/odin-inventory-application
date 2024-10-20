@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styles.css">
+    <title>Inventory App</title>
+</head>
+<body>
+    <%- include('partials/header') %>
+    <div class="top-text">
+        <div class="movies-text">
+            <h1>All Genres</h1>
+            <div>Here's a list of all available genres.</div>
+        </div>
+        <a class="movie-add-button" href="/genres/new"><button>Add Genre</button></a>
+    </div>
+    <div class="genres-container">
+        <% genres.map((genre) => { %>
+            <div class="genre">
+                <div class="genre-top">
+                    <div class="genre-title"><%= genre.name%></div>
+                    <div class="genre-description"><%= genre.description%></div>
+                </div>
+                <div class="genre-buttons">
+                    <form method="GET" action="/genres/<%= genre.id%>">
+                        <button>View</button>
+                    </form>   
+                    <form method="GET" action="/genres/<%= genre.id%>/delete">
+                        <button>Delete</button>
+                    </form>
+                    <form method="GET" action="/genres/<%= genre.id%>/edit">
+                        <button>Edit</button>
+                    </form>         
+                </div>
+            </div>
+        <% }) %>
+    </div>
+</body>
+</html>
